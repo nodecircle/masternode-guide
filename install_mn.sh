@@ -4,6 +4,7 @@ echo "NodeCircle MN Install"
 echo "=================================================================="
 
 echo -n "Installing pwgen..."
+sudo apt-get update
 sudo apt-get install -y pwgen
 
 echo -n "Installing dns utils..."
@@ -28,20 +29,15 @@ echo "SWAP setup complete..."
 
 echo "Installing packages and updates..."
 
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
 sudo apt-get install git -y
 sudo apt-get install nano -y
-sudo apt-get install build-essential libtool automake autoconf -y
-sudo apt-get install autotools-dev autoconf pkg-config libssl-dev -y
+sudo apt-get install libtool -y
+sudo apt-get install autotools-dev pkg-config libssl-dev -y
 sudo apt-get install libgmp3-dev libevent-dev bsdmainutils libboost-all-dev -y
 sudo apt-get install libzmq3-dev -y
 sudo apt-get install libminiupnpc-dev -y
 sudo add-apt-repository ppa:bitcoin/bitcoin -y
 sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
 sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 sudo apt-get install libdb5.3-dev libdb5.3++-dev -y
 
@@ -57,15 +53,14 @@ wget https://github.com/nodecircle/NodeCircle/releases/download/v1.0.0/nodecircl
 
 mkdir nodecircle-1.0.0
 tar -zxvf nodecircle-1.0.0-x86_64-linux-gnu.tar.gz
-sudo rm -rf /usr/local/bin/nodecircle-cli
-sudo rm -rf /usr/local/bin/nodecircled
-sudo cp nodecircle-1.0.0/bin/nodecircle-cli /usr/local/bin/
-sudo cp nodecircle-1.0.0/bin/nodecircled /usr/local/bin/
-
 
 nodecircle-cli stop
 sleep 20
 
+sudo rm -rf /usr/local/bin/nodecircle-cli
+sudo rm -rf /usr/local/bin/nodecircled
+sudo cp nodecircle-1.0.0/bin/nodecircle-cli /usr/local/bin/
+sudo cp nodecircle-1.0.0/bin/nodecircled /usr/local/bin/
 
 rm -rdf /root/.nodecircle
 mkdir /root/.nodecircle
@@ -116,7 +111,6 @@ nodecircle-cli stop
 echo "setting basic security..."
 sudo apt-get install fail2ban -y
 sudo apt-get install -y ufw
-sudo apt-get update -y
 
 #fail2ban:
 sudo systemctl enable fail2ban
